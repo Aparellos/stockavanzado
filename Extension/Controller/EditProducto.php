@@ -171,7 +171,8 @@ class EditProducto
             if ($viewName == 'ListMovimientoStock') {
                 $where = [Where::eq('idproducto', $id)];
                 $view->loadData('', $where);
-                $view->setSettings('active', $view->model->count($where) > 0);
+                // mantener activo para poder regenerar en productos que no aparecen movimientos, pero realmente hay
+                // $view->setSettings('active', $view->model->count($where) > 0);
             }
         };
     }
