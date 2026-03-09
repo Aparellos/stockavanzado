@@ -119,24 +119,22 @@ class EditProducto
                 $this->listView($viewName)->addFilterSelect('codalmacen', 'warehouse', 'codalmacen', Almacenes::codeModel());
             }
 
-            // desactivamos los botones de nuevo, eliminar y checkbox
-            if ($this->user->admin) {
-                $this->addButton($viewName, [
-                    'action' => 'rebuild-movements',
-                    'color' => 'warning',
-                    'confirm' => true,
-                    'icon' => 'fa-solid fa-repeat',
-                    'label' => 'rebuild-movements'
-                ]);
+            // desactivamos os botones de nuevo, eliminar y checkbox
+            $this->addButton($viewName, [
+                'action' => 'rebuild-movements',
+                'color' => 'warning',
+                'confirm' => true,
+                'icon' => 'fa-solid fa-repeat',
+                'label' => 'rebuild-movements'
+            ]);
 
-                $this->addButton($viewName, [
-                    'action' => 'rebuild-stock',
-                    'color' => 'warning',
-                    'confirm' => true,
-                    'icon' => 'fa-solid fa-dolly',
-                    'label' => 'rebuild-stock'
-                ]);
-            }
+            $this->addButton($viewName, [
+                'action' => 'rebuild-stock',
+                'color' => 'warning',
+                'confirm' => true,
+                'icon' => 'fa-solid fa-dolly',
+                'label' => 'rebuild-stock'
+            ]);
         };
     }
 
@@ -180,10 +178,7 @@ class EditProducto
     protected function rebuildMovementsAction(): Closure
     {
         return function () {
-            if (false === $this->user->admin) {
-                Tools::log()->warning('not-allowed-modify');
-                return;
-            } elseif (false === $this->validateFormToken()) {
+            if (false === $this->validateFormToken()) {
                 return;
             }
 
@@ -203,10 +198,7 @@ class EditProducto
     protected function rebuildStockAction(): Closure
     {
         return function () {
-            if (false === $this->user->admin) {
-                Tools::log()->warning('not-allowed-modify');
-                return;
-            } elseif (false === $this->validateFormToken()) {
+            if (false === $this->validateFormToken()) {
                 return;
             }
 
